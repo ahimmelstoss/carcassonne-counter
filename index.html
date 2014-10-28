@@ -3,24 +3,34 @@
   <title>Carcassonne Counter</title>
   <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-  <script src="js/carcassonne_counter.js"></script>
   <script src="js/jquery-1.8.3.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
+  <script src="js/carcassonne_counter.js"></script>
 </head>
 <body>
 
-  <nav class="nav-bar">
-      <ul>
-          <li><a href="#"></a></li><!--
-       --><li><a href="#"></a></li><!--
-       --><li><a href="#"></a></li><!--
-       --><li><a href="#"></a></li>
-      </ul>
-  </nav>
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+    Menu
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Players</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Colors</a></li>
+  </ul>
+</div>
 
-  <div class="counter">
-    
+<div id="counter1" class="player player1">
+  <div class="v-center">
+    <span class="clicks1">0</span>
   </div>
+</div>
+
+<div id="counter2" class="player player2">
+  <div class="v-center">
+    <span class="clicks2">0</span>
+  </div>
+</div>
 
 </body>
 </html>
