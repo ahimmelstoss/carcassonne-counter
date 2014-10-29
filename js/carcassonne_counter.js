@@ -27,6 +27,11 @@ function Player(number, color) {
     this.pointSpan.html(this.points);
   }
 
+  this.ResetScore = function() {
+    this.points = 0;
+    this.pointSpan.html(this.points);
+  }
+
   this.AttachHandlerAndSetColor = function() {
     // Save 'this' in a var so that it can be accessed when jquery calls the handler.
     var thisObject = this;
@@ -37,6 +42,19 @@ function Player(number, color) {
     $(".player" + this.number).css("color", GetTextColor(this.color));
     $(".player" + this.number).css("background-color", this.color);
   }
+}
+
+function ResetGame() {
+  $(".reset").on("click", function(){
+    // reset players points
+    for (var i = 0; i < playersArray.length; i++) {
+      playersArray[i].ResetScore();
+    };
+    while(playersArray.length && colorsArray) {
+      playersArray.pop();
+      colorsArray.pop();
+    }
+  })
 }
 
 function SelectColors() {
@@ -59,4 +77,6 @@ $(document).ready(function(){
   for (var i = 0; i < playersArray.length; i++) {
     playersArray[i].AttachHandlerAndSetColor();
   };
+  ResetGame();
+
 });
