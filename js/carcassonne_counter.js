@@ -1,7 +1,18 @@
+var colorHexes = {
+  red: "#FF0000",
+  blue: "#0000FF",
+  grey: "#808080",
+  black: "#000000",
+  green: "#009900",
+  yellow: "#FFFF00"
+};
+var playersArray = [];
+var colorsArray = [];
+
 // Returns "black" or "white" given a hex color description.
 // The returned color will contrast with the given color.
-function GetContrast50(hexColor){
-  var hexNumber = hexColor.replace("#", "0x");
+function GetTextColor(backgroundColor){
+  var hexNumber = backgroundColor.replace("#", "0x");
   return (parseInt(hexNumber, 16) > 0xffffff/2) ? 'black':'white';
 }
 
@@ -17,29 +28,35 @@ function Player(number, color) {
   }
 
   this.AttachHandlerAndSetColor = function() {
-    // Save 'this' in a var so that it can be accessed
-    // when jquery calls the handler.
+    // Save 'this' in a var so that it can be accessed when jquery calls the handler.
     var thisObject = this;
     this.pointSpan = $(".clicks" + this.number)
     $("#counter" + this.number).on("click", function() {
-     thisObject.IncrementNumber(); })
+      thisObject.IncrementNumber(); })
     // Set the background color of the text.
-    $(".player" + this.number).css("color", GetContrast50(this.color));
+    $(".player" + this.number).css("color", GetTextColor(this.color));
+    $(".player" + this.number).css("background-color", this.color);
   }
 }
 
-function SelectNumPlayers() {
-
+function SelectColors() {
+  var selectedColors = $("input:checked");
+  for (var i = 0; i < selectedColors.length; i++) {
+    colorsArray.push(selectedColors[i].value);
+  };
+  // on click of checkboxes, reset colors array and players array to represent the checked things
 }
 
-// We will create the players programmatically, based on the selected number of players.
-// We will also allow the user to select the colors for each player.
-// We can create a player factor object that will create the players
-// given the selected parameters.
-var player1 = new Player(1, "#FF0000");
-var player2 = new Player(2, "#0000FF");
+function CreatePlayers(numOfPlayers, colors) {
+  for (var i = 0; i < numOfPlayers; i++) {
+    playersArray.push(new Player(i, colors[i]));
+  };
+}
 
 $(document).ready(function(){
-  player1.AttachHandlerAndSetColor();
-  player2.AttachHandlerAndSetColor();
+  SelectColors();
+  CreatePlayers(colorsArray.length, colorsArray);
+  for (var i = 0; i < playersArray.length; i++) {
+    playersArray[i].AttachHandlerAndSetColor();
+  };
 });
