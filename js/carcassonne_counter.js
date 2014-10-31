@@ -45,16 +45,18 @@ function Player(number, color) {
 }
 
 function ResetGame() {
-  $(".reset").on("click", function(){
-    // reset players points
-    for (var i = 0; i < playersArray.length; i++) {
-      playersArray[i].ResetScore();
-    };
-    while(playersArray.length && colorsArray) {
-      playersArray.pop();
-      colorsArray.pop();
-    }
-  })
+  // reset players points
+  for (var i = 0; i < playersArray.length; i++) {
+    playersArray[i].ResetScore();
+  };
+  while(playersArray.length && colorsArray) {
+    playersArray.pop();
+    colorsArray.pop();
+  }
+}
+
+function SetResetHandler() {
+  $(".reset").on("click", ResetGame);
 }
 
 function SelectColors() {
@@ -77,6 +79,5 @@ $(document).ready(function(){
   for (var i = 0; i < playersArray.length; i++) {
     playersArray[i].AttachHandlerAndSetColor();
   };
-  ResetGame();
-
+  SetResetHandler();
 });
