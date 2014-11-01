@@ -30,3 +30,10 @@ span {
   position: fixed !important;
   z-index: 2;
 }
+
+#counter0 {
+  -webkit-transform:rotate(-180deg);
+  -moz-transform:rotate(-180deg); 
+  -o-transform:rotate(-180deg); 
+  transform:rotate(-180deg);
+}
