@@ -1,3 +1,3 @@
 # Carcassonne Counter
 
-A javascript one page app for keeping track of players' tallies. You can select the number of players and their colors. Functions by `.onClick()` incrementing or typing in number to add.
+Carcassonne Counter is a static Rack app using JavaScript that lets you keep tally of points in a game. Selecting the colors or your players generates counters for each player. Mobile-responsive.
