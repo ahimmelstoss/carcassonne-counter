@@ -2,6 +2,7 @@ body {
   margin: 0;
   height: 100vh;
   width: 100vw;
+  -ms-touch-action: none !important;
 }
 
 .player {
@@ -23,7 +24,7 @@ body {
 }
 
 span {
-  font-size: xx-large; 
+  font-size: 18em; 
 }
 
 .dropdown {
