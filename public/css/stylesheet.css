@@ -4,12 +4,42 @@ body {
   width: 100vw;
 }
 
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
 .player {
+  border-radius: 7px;
+  position: relative;
+}
+
+.layout-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+}
+
+#container2 .player {
   width: 100vw;
   height: 50vh;
   line-height: 50vh;
-  border-radius: 7px;
-  position: relative;
+}
+
+#container3 .player {
+  width: 100vw;
+  height: 33vh;
+  line-height: 33vh;
+}
+
+#container4 .player {
+  width: 50vw;
+  height: 50vh;
+  line-height: 50vh;
 }
 
 .v-center {

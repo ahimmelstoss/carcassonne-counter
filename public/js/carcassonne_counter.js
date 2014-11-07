@@ -36,7 +36,7 @@ function Player(number, color) {
     // Save 'this' in a var so that it can be accessed when jquery calls the handler.
     var thisObject = this;
     this.pointSpan = $(".clicks" + this.number)
-    $("#counter" + this.number).on("click", function() {
+    $(".player" + this.number).on("click", function() {
       thisObject.IncrementNumber(); })
     // Set the background color of the text.
     $(".player" + this.number).css("color", GetTextColor(this.color));
@@ -49,7 +49,7 @@ function ResetGame() {
   for (var i = 0; i < playersArray.length; i++) {
     playersArray[i].ResetScore();
   };
-  while(playersArray.length && colorsArray) {
+  while (playersArray.length && colorsArray) {
     playersArray.pop();
     colorsArray.pop();
   }
@@ -71,6 +71,9 @@ function CreatePlayers(numOfPlayers, colors) {
   for (var i = 0; i < numOfPlayers; i++) {
     playersArray.push(new Player(i, colors[i]));
   };
+  // Hide all the other layouts, and display the right one for this number of players.
+  $(".layout-container").css("display", "none");
+  $("#container" + numOfPlayers).css("display", "block");
 }
 
 $(document).ready(function(){
