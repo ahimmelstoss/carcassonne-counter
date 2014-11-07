@@ -34,10 +34,9 @@ function Player(number, color) {
 
   this.AttachHandlerAndSetColor = function() {
     // Save 'this' in a var so that it can be accessed when jquery calls the handler.
-    var thisObject = this;
     this.pointSpan = $(".clicks" + this.number)
     $(".player" + this.number).on("click", function() {
-      thisObject.IncrementNumber(); })
+      this.IncrementNumber(); }.bind(this))
     // Set the background color of the text.
     $(".player" + this.number).css("color", GetTextColor(this.color));
     $(".player" + this.number).css("background-color", this.color);
