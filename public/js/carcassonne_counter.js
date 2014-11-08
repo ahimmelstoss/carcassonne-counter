@@ -21,6 +21,7 @@ function Player(number, color) {
   this.number = number;
   this.color = color;
   this.points = 0;
+  this.pointSpan = $(".clicks" + this.number)
 }
 
 Player.prototype.incrementNumber = function() {
@@ -33,13 +34,15 @@ Player.prototype.resetScore = function() {
   this.pointSpan.html(this.points);
 }
 
-Player.prototype.attachHandlerAndSetColor = function() {
-  this.pointSpan = $(".clicks" + this.number)
-  $(".player" + this.number).on("click", function() {
-    this.incrementNumber(); }.bind(this))
+Player.prototype.setColor = function() {
   // Set the background color of the text.
   $(".player" + this.number).css("color", getTextColor(this.color));
   $(".player" + this.number).css("background-color", this.color);
+}
+
+Player.prototype.attachClickHandler = function() {
+  $(".player" + this.number).on("click", function() {
+    this.incrementNumber(); }.bind(this))
 }
 
 function resetGame() {
@@ -74,7 +77,8 @@ $(document).ready(function(){
   selectColors();
   createPlayers(colorsArray.length, colorsArray);
   for (var i = 0; i < playersArray.length; i++) {
-    playersArray[i].attachHandlerAndSetColor();
+    playersArray[i].attachClickHandler();
+    playersArray[i].setColor();
   };
   setResetHandler();
 });
