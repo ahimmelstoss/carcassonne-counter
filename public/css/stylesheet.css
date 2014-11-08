@@ -89,6 +89,26 @@ body {
   transform:rotate(-180deg);
 }
 
+.colorcheckbox {
+  visibility: hidden;
+}
+
+.colorcheckbox + span {
+  padding: 10px 30px 10px 30px;
+}
+
 .colorcheckbox:checked + span {
-  font-style: italic;
+  background-color: #CCCCCC;
+  border-radius: 7px;
+}
+
+.modal-custom {
+  font-size: 6em;
+}
+
+.btn-xl {
+  padding: 18px 28px !important;
+  font-size: 22px !important;
+  font-weight: bolder !important;
+  border-radius: 8px !important;
 }
