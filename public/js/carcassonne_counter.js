@@ -11,7 +11,7 @@ var colorsArray = [];
 
 // Returns "black" or "white" given a hex color description.
 // The returned color will contrast with the given color.
-function GetTextColor(backgroundColor){
+function getTextColor(backgroundColor){
   var hexNumber = backgroundColor.replace("#", "0x");
   return (parseInt(hexNumber, 16) > 0xffffff/2) ? 'black':'white';
 }
@@ -21,41 +21,39 @@ function Player(number, color) {
   this.number = number;
   this.color = color;
   this.points = 0;
-
-  this.IncrementNumber = function() {
-    this.points += 1;
-    this.pointSpan.html(this.points);
-  }
-
-  this.ResetScore = function() {
-    this.points = 0;
-    this.pointSpan.html(this.points);
-  }
-
-  this.AttachHandlerAndSetColor = function() {
-    // Save 'this' in a var so that it can be accessed when jquery calls the handler.
-    var thisObject = this;
-    this.pointSpan = $(".clicks" + this.number)
-    $(".player" + this.number).on("click", function() {
-      thisObject.IncrementNumber(); })
-    // Set the background color of the text.
-    $(".player" + this.number).css("color", GetTextColor(this.color));
-    $(".player" + this.number).css("background-color", this.color);
-  }
 }
 
-function ResetGame() {
+Player.prototype.incrementNumber = function() {
+  this.points += 1;
+  this.pointSpan.html(this.points);
+}
+
+Player.prototype.resetScore = function() {
+  this.points = 0;
+  this.pointSpan.html(this.points);
+}
+
+Player.prototype.attachHandlerAndSetColor = function() {
+  this.pointSpan = $(".clicks" + this.number)
+  $(".player" + this.number).on("click", function() {
+    this.incrementNumber(); }.bind(this))
+  // Set the background color of the text.
+  $(".player" + this.number).css("color", getTextColor(this.color));
+  $(".player" + this.number).css("background-color", this.color);
+}
+
+function resetGame() {
   // reset players points
   for (var i = 0; i < playersArray.length; i++) {
-    playersArray[i].ResetScore();
+    playersArray[i].resetScore();
   };
 }
 
-function SetResetHandler() {
-  $(".reset").on("click", ResetGame);
+function setResetHandler() {
+  $(".reset").on("click", resetGame);
 }
 
-function SelectColors() {
+function selectColors() {
   var selectedColors = $("input:checked");
   for (var i = 0; i < selectedColors.length; i++) {
     colorsArray.push(selectedColors[i].value);
@@ -63,7 +61,7 @@ function SelectColors() {
   // on click of checkboxes, reset colors array and players array to represent the checked things
 }
 
-function CreatePlayers(numOfPlayers, colors) {
+function createPlayers(numOfPlayers, colors) {
   for (var i = 0; i < numOfPlayers; i++) {
     playersArray.push(new Player(i, colors[i]));
   };
@@ -73,10 +71,10 @@ function CreatePlayers(numOfPlayers, colors) {
 }
 
 $(document).ready(function(){
-  SelectColors();
-  CreatePlayers(colorsArray.length, colorsArray);
+  selectColors();
+  createPlayers(colorsArray.length, colorsArray);
   for (var i = 0; i < playersArray.length; i++) {
-    playersArray[i].AttachHandlerAndSetColor();
+    playersArray[i].attachHandlerAndSetColor();
   };
-  SetResetHandler();
+  setResetHandler();
 });
