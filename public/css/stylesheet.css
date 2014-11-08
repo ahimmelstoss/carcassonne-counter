@@ -32,7 +32,7 @@ body {
 
 #container3 .player {
   width: 100vw;
-  height: 33vh;
+  height: 33.3333vh;
   line-height: 33vh;
 }
 
@@ -40,6 +40,19 @@ body {
   width: 50vw;
   height: 50vh;
   line-height: 50vh;
+  float: left;
+}
+
+#container5 .player {
+  width: 100vw;
+  height: 20vh;
+  line-height: 10vh;
+}
+
+#container6 .player {
+  width: 50vw;
+  height: 33.333vh;
+  line-height: 33vh;
   float: left;
 }
 
@@ -54,7 +67,14 @@ body {
 }
 
 span {
-  font-size: 18em; 
+  font-size: 18em;
+}
+
+#container5 span {
+  font-size: 8em;
+}
+#container6 span {
+  font-size: 8em;
 }
 
 .dropdown {

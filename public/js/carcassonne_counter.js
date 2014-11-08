@@ -12,7 +12,7 @@ var colorsArray = [];
 // Returns "black" or "white" given a hex color description.
 // The returned color will contrast with the given color.
 function getTextColor(backgroundColor){
-  var hexNumber = backgroundColor.replace("#", "0x");
+  var hexNumber = colorHexes[backgroundColor].replace("#", "0x");
   return (parseInt(hexNumber, 16) > 0xffffff/2) ? 'black':'white';
 }
 
@@ -34,10 +34,11 @@ Player.prototype.resetScore = function() {
   this.pointSpan.html(this.points);
 }
 
-Player.prototype.setColor = function() {
+Player.prototype.setHTMLColor = function() {
   // Set the background color of the text.
   $(".player" + this.number).css("color", getTextColor(this.color));
   $(".player" + this.number).css("background-color", this.color);
+  console.log("Setting color of .player" + this.number + " to " + this.color);
 }
 
 Player.prototype.attachClickHandler = function() {
@@ -46,39 +47,51 @@ Player.prototype.attachClickHandler = function() {
 }
 
 function resetGame() {
+  // Build colorsArray.
+  selectColors();
+  console.log("colors: " + colorsArray);
   // reset players points
   for (var i = 0; i < playersArray.length; i++) {
     playersArray[i].resetScore();
   };
+  // Delete the players and create new ones.
+  while (playersArray.length) {
+    playersArray.pop();
+  }
+  createPlayers(colorsArray.length, colorsArray);
 }
 
 function setResetHandler() {
   $(".reset").on("click", resetGame);
 }
 
-function selectColors() {
-  var selectedColors = $("input:checked");
-  for (var i = 0; i < selectedColors.length; i++) {
-    colorsArray.push(selectedColors[i].value);
-  };
-  // on click of checkboxes, reset colors array and players array to represent the checked things
-}
-
-function createPlayers(numOfPlayers, colors) {
-  for (var i = 0; i < numOfPlayers; i++) {
-    playersArray.push(new Player(i, colors[i]));
-  };
+function setLayout(numOfPlayers) {
   // Hide all the other layouts, and display the right one for this number of players.
   $(".layout-container").css("display", "none");
   $("#container" + numOfPlayers).css("display", "block");
 }
 
+function selectColors() {
+  // Reset colors array to the selected colors.
+  var selectedColors = $("input:checked");
+  colorsArray = [];
+  for (var i = 0; i < selectedColors.length; i++) {
+    colorsArray.push(selectedColors[i].value);
+  };
+}
+
+function createPlayers(numOfPlayers, colors) {
+  for (var i = 0; i < numOfPlayers; i++) {
+    playersArray.push(new Player(i, colors[i]));
+    playersArray[i].attachClickHandler();
+    playersArray[i].setHTMLColor();
+    console.log("Created player " + i + " of color " + colors[i]);
+  };
+  setLayout(numOfPlayers);
+}
+
 $(document).ready(function(){
   selectColors();
   createPlayers(colorsArray.length, colorsArray);
-  for (var i = 0; i < playersArray.length; i++) {
-    playersArray[i].attachClickHandler();
-    playersArray[i].setColor();
-  };
   setResetHandler();
 });
