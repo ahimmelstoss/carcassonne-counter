@@ -29,6 +29,14 @@ Player.prototype.incrementNumber = function() {
   this.pointSpan.html(this.points);
 }
 
+Player.prototype.decrementNumber = function() {
+  if (this.points == 0) {
+    return;
+  }
+  this.points -= 1;
+  this.pointSpan.html(this.points);
+}
+
 Player.prototype.resetScore = function() {
   this.points = 0;
   this.pointSpan.html(this.points);
@@ -48,9 +56,11 @@ Player.prototype.attachClickHandler = function() {
   // We treat both tap and double-tap the same (a double-tap is always
   // preceeded by a tap).
   $(".player" + this.number).on("tap", function() {
-    this.incrementNumber(); }.bind(this))
+    this.incrementNumber(); }.bind(this));
   $(".player" + this.number).on("doubletap", function() {
-    this.incrementNumber(); }.bind(this))
+    this.incrementNumber(); }.bind(this));
+  $(".player" + this.number).on("flick", function() {
+    this.decrementNumber(); }.bind(this));
 }
 
 function resetGame() {
