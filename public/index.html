@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<div class="modal fade" id="colorsModal" tabindex="-1" role="dialog" aria-labelledby="colorsModalLabel" aria-hidden="true">
+<div class="modal fade modal-custom" id="colorsModal" tabindex="-1" role="dialog" aria-labelledby="colorsModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -27,18 +27,18 @@
           <label><input type="checkbox" name="color" value="yellow">Yellow</label>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary reset" data-dismiss="modal">New Game</button>
+        <button type="button" class="btn btn-default btn-xl" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btn-xl reset" data-dismiss="modal">New Game</button>
       </div>
     </div>
   </div>
 </div>
 
 <div class="dropdown">
-  <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#colorsModal">
+  <button type="button" class="btn btn-default btn-xl" data-toggle="modal" data-target="#colorsModal">
     Colors
   </button>
-  <button class="btn btn-default btn-lg reset" type="button">
+  <button class="btn btn-default btn-xl reset" type="button">
     New Game
   </button>
 </div>

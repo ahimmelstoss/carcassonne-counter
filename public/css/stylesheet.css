@@ -88,3 +88,14 @@ body {
   -o-transform:rotate(-180deg); 
   transform:rotate(-180deg);
 }
+
+.modal-custom {
+  font-size: 6em;
+}
+
+.btn-xl {
+  padding: 18px 28px !important;
+  font-size: 22px !important;
+  font-weight: bolder !important;
+  border-radius: 8px !important;
+}
