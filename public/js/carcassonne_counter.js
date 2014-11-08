@@ -34,7 +34,6 @@ Player.prototype.resetScore = function() {
 }
 
 Player.prototype.attachHandlerAndSetColor = function() {
-  // Save 'this' in a var so that it can be accessed when jquery calls the handler.
   this.pointSpan = $(".clicks" + this.number)
   $(".player" + this.number).on("click", function() {
     this.incrementNumber(); }.bind(this))
