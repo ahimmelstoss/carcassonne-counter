@@ -42,7 +42,14 @@ Player.prototype.setHTMLColor = function() {
 }
 
 Player.prototype.attachClickHandler = function() {
-  $(".player" + this.number).on("click", function() {
+  // We use the jquery.finger plugin to detect "tap" events.
+  // On iOS (both Mobile Safari and Mobile Chrome), double-tapping an
+  // element does not fire two click events, even if page zoom is disabled.
+  // We treat both tap and double-tap the same (a double-tap is always
+  // preceeded by a tap).
+  $(".player" + this.number).on("tap", function() {
+    this.incrementNumber(); }.bind(this))
+  $(".player" + this.number).on("doubletap", function() {
     this.incrementNumber(); }.bind(this))
 }
 
