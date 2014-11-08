@@ -49,10 +49,6 @@ function ResetGame() {
   for (var i = 0; i < playersArray.length; i++) {
     playersArray[i].ResetScore();
   };
-  while (playersArray.length && colorsArray) {
-    playersArray.pop();
-    colorsArray.pop();
-  }
 }
 
 function SetResetHandler() {
