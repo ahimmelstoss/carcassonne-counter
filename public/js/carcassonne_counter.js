@@ -5,9 +5,9 @@ var colorHexes = {
   black: "#000000",
   green: "#009900",
   yellow: "#FFFF00"
-};
-var playersArray = [];
-var colorsArray = [];
+},
+  playersArray = [], 
+  colorsArray = [];
 
 // Returns "black" or "white" given a hex color description.
 // The returned color will contrast with the given color.
@@ -66,7 +66,7 @@ function resetGame() {
   selectColors();
   console.log("colors: " + colorsArray);
   // reset players points
-  for (var i = 0; i < playersArray.length; i++) {
+  for (var i = 0, numPlayers = playersArray.length; i < numPlayers; i++) {
     playersArray[i].resetScore();
   };
   // Delete the players and create new ones.
@@ -90,7 +90,7 @@ function selectColors() {
   // Reset colors array to the selected colors.
   var selectedColors = $("input:checked");
   colorsArray = [];
-  for (var i = 0; i < selectedColors.length; i++) {
+  for (var i = 0, numColors = selectedColors.length; i < numColors; i++) {
     colorsArray.push(selectedColors[i].value);
   };
 }
