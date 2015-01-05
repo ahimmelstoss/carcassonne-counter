@@ -6,7 +6,6 @@ class App < Sinatra::Base
   end
 
   get '/games' do 
-    #lists all games
   end
 
   post '/save_game' do

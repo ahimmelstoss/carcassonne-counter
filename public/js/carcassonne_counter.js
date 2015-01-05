@@ -29,7 +29,6 @@ Player.prototype = {
   incrementNumber: function(){
     this.points += 1;
     this.pointSpan.html(this.points);
-    saveGame();
   },
   decrementNumber: function(){
     if(this.points == 0){
@@ -37,7 +36,6 @@ Player.prototype = {
     }
     this.points -= 1;
     this.pointSpan.html(this.points);
-    saveGame();
   },
   setHTMLColor: function(){
     // Set the background color of the text.
@@ -127,6 +125,8 @@ function saveGame() {
     }
   });
 }
+
+setInterval(saveGame, 10000);
 
 $(document).ready(function() {
   setGameId();
