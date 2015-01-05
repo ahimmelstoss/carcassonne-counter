@@ -7,7 +7,8 @@ var colorHexes = {
   yellow: "#FFFF00"
 },
   playersArray = [], 
-  colorsArray = [];
+  colorsArray = [],
+  gameId = 0;
 
 // Returns "black" or "white" given a hex color description.
 // The returned color will contrast with the given color.
@@ -28,6 +29,7 @@ Player.prototype = {
   incrementNumber: function(){
     this.points += 1;
     this.pointSpan.html(this.points);
+    saveGame();
   },
   decrementNumber: function(){
     if(this.points == 0){
@@ -35,16 +37,16 @@ Player.prototype = {
     }
     this.points -= 1;
     this.pointSpan.html(this.points);
-  },
-  resetScore: function(){
-    this.points = 0;
-    this.pointSpan.html(this.points);
+    saveGame();
   },
   setHTMLColor: function(){
     // Set the background color of the text.
     $(".player" + this.number).css("color", getTextColor(this.color));
     $(".player" + this.number).css("background-color", this.color);
     console.log("Setting color of .player" + this.number + " to " + this.color);
+  },
+  setHTMLNumber: function() {
+    this.pointSpan.html(this.points);
   },
   attachClickHandler: function(){
     // We use the jquery.finger plugin to detect "tap" events.
@@ -65,15 +67,12 @@ function resetGame() {
   // Build colorsArray.
   selectColors();
   console.log("colors: " + colorsArray);
-  // reset players points
-  for (var i = 0, numPlayers = playersArray.length; i < numPlayers; i++) {
-    playersArray[i].resetScore();
-  };
   // Delete the players and create new ones.
   while (playersArray.length) {
     playersArray.pop();
   }
   createPlayers(colorsArray.length, colorsArray);
+  setGameId();  // resetGame creates a new game, so the gameId needs to be reset
 }
 
 function setResetHandler() {
@@ -100,12 +99,37 @@ function createPlayers(numOfPlayers, colors) {
     playersArray.push(new Player(i, colors[i]));
     playersArray[i].attachClickHandler();
     playersArray[i].setHTMLColor();
+    playersArray[i].setHTMLNumber();
     console.log("Created player " + i + " of color " + colors[i]);
   };
   setLayout(numOfPlayers);
 }
 
-$(document).ready(function(){
+function setGameId() {
+  gameId = Date.now();
+}
+
+function saveGame() {
+  //game id, num players, scores
+  $.ajax({
+    type: "POST",
+    url: '/save_game',
+    dataType: "json",
+    data: { 
+      game_id: gameId, 
+      num_players: playersArray.length,
+      player_1_score: playersArray[0].points,
+      player_2_score: playersArray[1].points,
+      player_3_score: playersArray.length >= 3 ? playersArray[2].points : 0,
+      player_4_score: playersArray.length >= 4 ? playersArray[3].points : 0,
+      player_5_score: playersArray.length >= 5 ? playersArray[4].points : 0,
+      player_6_score: playersArray.length >= 6 ? playersArray[5].points : 0
+    }
+  });
+}
+
+$(document).ready(function() {
+  setGameId();
   selectColors();
   createPlayers(colorsArray.length, colorsArray);
   setResetHandler();
