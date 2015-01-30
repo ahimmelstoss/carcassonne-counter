@@ -49,6 +49,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  json
   pg
   pry
   rake

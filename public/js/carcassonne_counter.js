@@ -108,7 +108,6 @@ function setGameId() {
 }
 
 function saveGame() {
-  //game id, num players, scores
   $.ajax({
     type: "POST",
     url: '/save_game',
@@ -133,18 +132,34 @@ function saveGame() {
 }
 
 function loadGame() {
+  var url = window.location.href;
+  var start_index = url.indexOf("game_id");
+  var game_id = parseInt(url.substring(start_index+8));
+
   $.ajax({
     type: "GET",
-    url: '/get_game/' + gameId,
-    success:
+    url: '/get_game/' + game_id,
+    success: function() {
+      // setting game id
+      // selecting the colors from the data returned
+      // creating the players array
+      // set the scores of the players
+    }
   })
 }
 
 setInterval(saveGame, 10000);
 
 $(document).ready(function() {
-  setGameId();
-  selectColors();
-  createPlayers(colorsArray.length, colorsArray);
+  if(window.location.href.indexOf("game_id") >= 0) {
+    loadGame();
+  } else {
+    setGameId();
+    selectColors();
+    createPlayers(colorsArray.length, colorsArray);
+  }
+  // if location contains game id
+    // load game, which sets, colors, scores, and num players from an ajax call
+    // else
   setResetHandler();
 });

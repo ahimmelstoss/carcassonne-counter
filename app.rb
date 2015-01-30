@@ -9,8 +9,9 @@ class App < Sinatra::Base
   end
 
   get '/get_game/:game_id' do 
-    @game = Game.find_by(game_id: game_id)
-
+    content_type :json
+    @game = Game.find_by(game_id: params[:game_id])
+    @game.attributes.to_json
   end
 
   post '/save_game' do
@@ -30,6 +31,5 @@ class App < Sinatra::Base
       player_5_color: params[:player_5_color],
       player_6_color: params[:player_6_color]
     )
-    binding.pry
   end
 end
