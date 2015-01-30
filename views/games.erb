@@ -1,0 +1,21 @@
+<html>
+<head>
+  <title>Carcassonne Counter - Games</title>
+</head>
+<body>
+  <h1>All Games</h1>
+    <% num = 0 %>
+  <% @games.each do |game| %>
+    <%= num += 1 %>.
+    Number of Players: <%= game.num_players %> | 
+    Player 1 score: <%= game.player_1_score %> |
+    Player 2 score: <%= game.player_2_score %> |
+    Player 3 score: <%= game.player_3_score %> |
+    Player 4 score: <%= game.player_4_score %> |
+    Player 5 score: <%= game.player_5_score %> |
+    Player 6 score: <%= game.player_6_score %> |
+    <a href="#">Resume Game</a>
+    <br>
+  <% end %>
+</body>
+</html>

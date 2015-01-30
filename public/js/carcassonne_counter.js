@@ -121,9 +121,23 @@ function saveGame() {
       player_3_score: playersArray.length >= 3 ? playersArray[2].points : 0,
       player_4_score: playersArray.length >= 4 ? playersArray[3].points : 0,
       player_5_score: playersArray.length >= 5 ? playersArray[4].points : 0,
-      player_6_score: playersArray.length >= 6 ? playersArray[5].points : 0
+      player_6_score: playersArray.length >= 6 ? playersArray[5].points : 0,
+      player_1_color: playersArray[0].color,
+      player_2_color: playersArray[1].color,
+      player_3_color: playersArray.length >= 3 ? playersArray[2].color : 0,
+      player_4_color: playersArray.length >= 4 ? playersArray[3].color : 0,
+      player_5_color: playersArray.length >= 5 ? playersArray[4].color : 0,
+      player_6_color: playersArray.length >= 6 ? playersArray[5].color : 0
     }
   });
+}
+
+function loadGame() {
+  $.ajax({
+    type: "GET",
+    url: '/get_game/' + gameId,
+    success:
+  })
 }
 
 setInterval(saveGame, 10000);
